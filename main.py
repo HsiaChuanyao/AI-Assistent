@@ -21,6 +21,9 @@ llm = init_chat_model(
 )
 
 async def main():
+    print("="*60)
+    print(f"Starting MCP Client ...")
+    print("=" * 60)
     client = MultiServerMCPClient(
         {
             "weather":{
@@ -40,10 +43,26 @@ async def main():
             }
         }
     )
-
+    print(f'Loading tools from MCP')
     tools = await client.get_tools()
-    print(f"Loaded tools : {tools}")
-    agent = create_react_agent(llm, tools)
+    print(f"\n{'='*60}")
+    print(f"Successfully loaded {len(tools)} tools:")
+    print(f"\n{'='*60}")
+
+    for i, tool in enumerate(tools,1):
+        print(f"\n{i}. Tool Name: {tool.name}")
+        print(f"   Description: {tool.description}")
+        if hasattr(tool, 'args'):
+            print(f"   Args: {tool.args}")
+
+        print(f"\n{'='*60}")
+        print("Creating ReAct Agent...")
+        print(f"{'=' * 60}\n")
+
+        agent = create_react_agent(llm, tools)
+
+        print("Agent created successfully! Ready to accept queries.\n")
+        print("Type 'q', 'quit', or 'exit' to quit.\n")
 
     while True:
         user_input = input("Please enter your query here: ")
@@ -54,7 +73,10 @@ async def main():
                 print("Please give your query here and try again!")
                 continue
             if user_input.lower() in ["quit","exit","q"]:
+                print("Goodbye! Thanks for using.")
                 break
+
+            print(f"\nProcessing")
 
             agent_ans = await agent.ainvoke(inputs)
             if "messages" in agent_ans and len(agent_ans["messages"])>0:
