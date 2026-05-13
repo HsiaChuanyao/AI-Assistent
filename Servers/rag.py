@@ -13,7 +13,7 @@ import bs4
 from langchain_community.document_loaders import WebBaseLoader
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.prebuilt import create_react_agent
-from langchain_community.vectorstores import FAISS
+from langchain_core.vectorstores import InMemoryVectorStore
 
 
 
@@ -30,10 +30,13 @@ prompts = ChatPromptTemplate.from_template(
 bs4_strainer = bs4.SoupStrainer(class_={"title": "title", "content": "content"})
 web_loader = WebBaseLoader(
     web_paths= (
-        "https://docs.langchain.com/oss/python/langchain",
+        "https://python.langchain.com/docs/get_started/introduction",
     ),
     bs_kwargs={
         "parse_only": bs4_strainer
+    },
+    requests_kwargs={
+        "timeout": 30
     }
 )
 
@@ -42,7 +45,7 @@ file_content = web_loader.load()
 text_splitters = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 docs = text_splitters.split_documents(file_content)
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
-db = FAISS.from_documents(docs, embeddings)
+db = InMemoryVectorStore.from_documents(docs, embeddings)
 
 
 api_key = os.getenv("OPENAI_API_KEY")
