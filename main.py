@@ -1,4 +1,6 @@
 from dotenv import load_dotenv
+from langchain_ollama import ChatOllama
+
 load_dotenv()
 import os
 import getpass
@@ -15,8 +17,8 @@ if not api_key:
     api_key = getpass.getpass("Please provide your API Key, and try again.")
 
 llm = init_chat_model(
-    api_key = api_key,
-    model= "DeepSeek-chat",
+    api_key =api_key,
+    model="DeepSeek-chat",
     base_url="https://api.deepseek.com/v1",
 )
 
