@@ -100,37 +100,37 @@ def get_weather(location:str, days:int = 0):
         if days == 0:
             report= {
                 "Current weather": {
-                    "Temperature": f"{data["current"]["temperature_2m"]}℃",
-                    "Relative humidity": f"{data["current"]["relative_humidity_2m"]}%",
-                    "Apparent temperature": f"{data["current"]["apparent_temperature"]}℃",
-                    "Wind speed": f"{data["current"]["wind_speed_10m"]}m/s",
-                    "weather code": data["current"]["weather_code"],
+                    "Temperature": f"{data['current']['temperature_2m']}℃",
+                    "Relative humidity": f"{data['current']['relative_humidity_2m']}%",
+                    "Apparent temperature": f"{data['current']['apparent_temperature']}℃",
+                    "Wind speed": f"{data['current']['wind_speed_10m']}m/s",
+                    "weather code": data['current']['weather_code'],
                 }
             }
 
         elif days == 1:
             report = {
                 "Tomorrow": {
-                    "Temperature max": f"{data["daily"]["temperature_2m_max"][1]}℃",
-                    "Temperature min": f"{data["daily"]["temperature_2m_min"][1]}℃",
-                    "Sunrise": data["daily"]["sunrise"][1],
-                    "Sunset": data["daily"]["sunset"][1],
-                    "Precipitation": data["daily"]["precipitation_sum"][1],
-                    "weather code": data["daily"]["weather_code"][1]
+                    "Temperature max": f"{data['daily']['temperature_2m_max'][1]}℃",
+                    "Temperature min": f"{data['daily']['temperature_2m_min'][1]}℃",
+                    "Sunrise": data['daily']['sunrise'][1],
+                    "Sunset": data['daily']['sunset'][1],
+                    "Precipitation": data['daily']['precipitation_sum'][1],
+                    "weather code": data['daily']["weather_code"][1]
                 }
             }
         else :
             report = {
                 "Date": data["daily"]["time"][2],
-                "Temperature max": f"{data["daily"]["temperature_2m_max"][2]}℃",
-                "Temperature min": f"{data["daily"]["temperature_2m_min"][2]}℃",
-                "Sunrise": data["daily"]["sunrise"][2],
-                "Sunset": data["daily"]["sunset"][2],
-                "Precipitation": data["daily"]["precipitation_sum"][2],
-                "Wind speed": f"{data["daily"]["windspeed_10m_max"][2]}m/s",
-                "Wind gusts": f"{data["daily"]["windgusts_10m_max"][2]}m/s",
-                "Wind direction": data["daily"]["winddirection_10m_dominant"][2],
-                "weather code": data["daily"]["weather_code"][days]
+                "Temperature max": f"{data['daily']['temperature_2m_max'][2]}℃",
+                "Temperature min": f"{data['daily']['temperature_2m_min'][2]}℃",
+                "Sunrise": data['daily']['sunrise'][2],
+                "Sunset": data['daily']['sunset'][2],
+                "Precipitation": data['daily']['precipitation_sum'][2],
+                "Wind speed": f"{data['daily']['windspeed_10m_max'][2]}m/s",
+                "Wind gusts": f"{data['daily']['windgusts_10m_max'][2]}m/s",
+                "Wind direction": data['daily']['winddirection_10m_dominant'][2],
+                "weather code": data['daily']['weather_code'][days]
             }
 
     except requests.exceptions.Timeout as e:

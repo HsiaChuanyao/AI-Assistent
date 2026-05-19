@@ -31,17 +31,17 @@ async def main():
             "weather":{
                 "transport": "stdio",
                 "command": "uv",
-                "args": ["run", "python", "./Servers/weather.py"]
+                "args": ["run", "python", "C:/Users/cxia/PycharmProjects/AI-Assistant/Servers/weather.py"]
             },
             "internet_search":{
                 "transport": "stdio",
                 "command": "uv",
-                "args": ["run", "python", "./Servers/internet_search.py"]
+                "args": ["run", "python", "C:/Users/cxia/PycharmProjects/AI-Assistant/Servers/internet_search.py"]
             },
             "rag":{
                 "transport": "stdio",
                 "command": "uv",
-                "args": ["run", "python", "./Servers/rag.py"]
+                "args": ["run", "python", "C:/Users/cxia/PycharmProjects/AI-Assistant/Servers/rag.py"]
             }
         }
     )
@@ -55,7 +55,7 @@ async def main():
         print(f"\n{i}. Tool Name: {tool.name}")
         print(f"   Description: {tool.description}")
         if hasattr(tool, 'args'):
-            print(f"   Args: {tool.args}")
+            print(f"   Args: {tool.args_schema}")
 
         print(f"\n{'='*60}")
         print("Creating ReAct Agent...")

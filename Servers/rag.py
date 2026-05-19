@@ -27,7 +27,7 @@ prompts = ChatPromptTemplate.from_template(
     """
 )
 
-bs4_strainer = bs4.SoupStrainer(class_={"title": "title", "content": "content"})
+bs4_strainer = bs4.SoupStrainer(class_=["title", "content"])
 web_loader = WebBaseLoader(
     web_paths= (
         "https://python.langchain.com/docs/get_started/introduction",
